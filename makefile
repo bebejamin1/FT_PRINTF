@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbeaurai < bbeaurai@student.42lehavre.f    +#+  +:+       +#+         #
+#    By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/08 17:23:29 by bbeaurai          #+#    #+#              #
-#    Updated: 2025/11/08 17:23:29 by bbeaurai         ###   ########.fr        #
+#    Updated: 2025/11/10 08:35:51 by bbeaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 NAME = libftprintf.a
 
-PRINT_SRCS = ft_all_putnbr.c ft_printf.c ft_utils.c ft_utils2.c
+PRINT_SRCS = ft_printf.c
 
 LIBFTDIR = Libft
 LIBFT = $(LIBFTDIR)/libft.a
@@ -30,8 +30,6 @@ $(LIBFT):
 $(NAME): $(PRINT_OBJS) $(LIBFT)
 	cp $(LIBFT) $(NAME)
 	ar rc $(NAME) $(PRINT_OBJS)
-
-	@echo "$(NAME) <3 successfully!"
 
 clean:
 	$(RM) $(PRINT_OBJS)
