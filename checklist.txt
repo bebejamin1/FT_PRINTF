@@ -17,13 +17,24 @@ Concevoir un système qui peut gérer les bonus.
 
 Coder la partie obligatoire en utilisant ce système (elle doit être parfaite).
 
-va_list blabla = in
 
-va_start = initialise va_list	va_start(blabla, prev_para)
 
-va_arg = 
+
+
+va_list = type de la variable qui va contenir la liste d'arguments. 
+quon utilisera dans va_start	va_list ma_boite_a_arguments;
+
+
+va_start = ouvre va_list		va_start(ma_boite_a_arguments, dernier_argument_fixe);
+fonction qui ouvre la boite 
+
+va_arg = sert a lire argument un par un, et pointe vers le prochain arguments.
+int prochain_int = va_arg(ma_boite_a_arguments, int);
 
 va_end = liberer tout mes copain
+
+
+
 
 
 Phase 1 : La Base (Conception Extensible)

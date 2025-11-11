@@ -1,103 +1,75 @@
-#include <assert.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/11 10:24:19 by bbeaurai          #+#    #+#             */
+/*   Updated: 2025/11/11 16:49:59 by bbeaurai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+// #include <stdarg.h>
+// #include <stdbool.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-size_t displayInteger( int value ) {
-    if ( value < 10 ) {
-        putchar( 0x30 + value );
-        return 1;
-    }
-    size_t size = displayInteger( value / 10);
-    putchar( 0x30 + value % 10 );
-    return 1 + size;
-}
+// int ft_sum(int first_num, ...)
+// {
+// 	va_list	ap;
+// 	int		num;
+// 	int		count;
 
+// 	va_start(ap, first_num);
+// 	num = 1;
+// 	count = first_num;
+// 	if (first_num == 0)
+// 		return (0);
+// 	while (num != 0)
+// 	{
+// 		num = va_arg(ap , int);
+// 		count = count + num;
+// 	}
+// 	va_end (ap);
+// 	return (count);
+// }
 
-/*
- * This function is a very simplified version of printf.
- * The only supported formats are:
- *      %s : inject a string
- *      %d : inject an integer value
- *      %f : inject a double value
- */
-int myPrintf( const char * format, ... ) {
+// int ft_find_char(int to_find, ...)
+// {
+// 	va_list	ap;
+// 	int		i;
+// 	char	*str;
+// 	char	c;
 
-    va_list parametersInfos;
-    /* Initialize the va_list structure */
-    va_start( parametersInfos, format );
+// 	c = (char)to_find;
+// 	va_start(ap, to_find);
+// 	if (!to_find)
+// 		return (0);
+// 	str = va_arg(ap , char *);
+// 	while (str != NULL)
+// 	{
+// 		i = 0;
+// 		while (str[i])
+// 		{
+// 			if (str[i] == c)
+// 				return (1);
+// 			i++;
+// 		}
+// 		str = va_arg(ap , char *);
+// 	}
+// 	va_end (ap);
+// 	return (0);
+// }
 
-    size_t writtenCharacters = 0;
-    char currentChar;
-
-    while( (currentChar = *format) != '\0' ) {
-        format ++;
-        if ( currentChar != '%' ) {
-            putchar( currentChar );
-            writtenCharacters ++;
-            continue;
-        }
-
-        switch( *format ++ ) {
-            case 'd':
-                {
-                    int integerValue = (int) va_arg( parametersInfos, int );
-                    writtenCharacters += displayInteger( integerValue );
-                }
-                break;
-            case 'f':
-                {
-                    double doubleValue = (double) va_arg( parametersInfos, double );
-                    int leftPart = (int) doubleValue;
-                    writtenCharacters += displayInteger( leftPart );
-                    doubleValue -= leftPart;
-
-                    putchar( '.' );
-                    writtenCharacters ++;
-
-                    while( ( doubleValue - (int) doubleValue ) > 10e-6 ) {
-                        doubleValue *= 10;
-                    }
-                    writtenCharacters += displayInteger( (int) doubleValue );
-                }
-                break;
-            case 's':
-                {
-                    const char * string = (const char *) va_arg( parametersInfos, const char * );
-                    while( *string != '\0' ) {
-                        putchar( *string ++ );
-                        writtenCharacters ++;
-                    }
-                }
-                break;
-            default:
-                fprintf( stderr, "Specified format is not supported!" );
-                abort();
-        }
-    }
-
-    /* Release va_list resources */
-    va_end( parametersInfos );
-
-    return writtenCharacters;
-}
-
-
-int main() {
-
-    size_t size = myPrintf( "Begin %s End\n", "Middle" );
-    assert( size == 17 );
-
-    size = myPrintf( "Begin %d End\n", 123 );
-    assert( size == 14 );
-
-    size = myPrintf( "Begin %f End\n", 123.456 );
-    assert( size == 18 );
-
-    size = myPrintf( "Begin %s %d %f End\n", "toto", 421, 123.456 );
-    assert( size == 27 );
-
-    return EXIT_SUCCESS;
-
-}
+// int	main(void)
+// {
+// 	printf("rep = %d\n", ft_sum(10, 20, 30, 0));
+// 	printf("rep = %d\n", ft_sum(5, 5, 0, 5, 5, 5));
+// 	printf("rep = %d\n", ft_sum(100, 0));
+// 	printf("rep = %d\n", ft_sum(0));
+// 	printf("sum = %d\n", ft_find_char('a', "hello", "world", "banana", NULL));
+// 	printf("sum = %d\n", ft_find_char('z', "hello", "world", "apple", NULL));
+// 	printf("sum = %d\n", ft_find_char('H', "Hello", "world", NULL));
+// 	printf("sum = %d\n", ft_find_char('\0', "hello", "world", NULL));
+// }
