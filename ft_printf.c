@@ -6,7 +6,7 @@
 /*   By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:26:53 by bbeaurai          #+#    #+#             */
-/*   Updated: 2025/11/12 13:53:56 by bbeaurai         ###   ########.fr       */
+/*   Updated: 2025/11/12 14:48:49 by bbeaurai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ size_t	check_format(char format, va_list ap)
 		lenght = for_char(va_arg(ap, int), lenght);
 	else if (format == 's')
 		lenght = for_str(va_arg(ap, char *), lenght);
-	// else if (format == 'p')
+	else if (format == 'p')
+		lenght = for_address(ap, lenght);
 	else if (format == 'd' || format == 'i')
 		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789");
-	// else if (format == 'u')
+	else if (format == 'u')
+		lenght = ft_unsigned_putnbr_base(va_arg(ap, unsigned int), "0123456789");
 	else if (format == 'x')
 		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
 	else if (format == 'X')
@@ -56,8 +58,9 @@ int	ft_printf(const char *format, ...)
 	return (lenght);
 }
 
-int	main(void)
-{
-	ft_printf("Begin 10 %X End\n", 15);
-	printf("\nBegin 10 %X End\n", 15);
-}
+// int	main(void)
+// {
+// 	char *str = "coucou";
+// 	ft_printf("Begin 10 %p End\n", &str);
+// 	printf("\nBegin 10 %p End\n", &str);
+// }

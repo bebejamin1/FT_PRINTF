@@ -6,7 +6,7 @@
 /*   By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 08:25:15 by bbeaurai          #+#    #+#             */
-/*   Updated: 2025/11/12 13:55:20 by bbeaurai         ###   ########.fr       */
+/*   Updated: 2025/11/12 14:45:57 by bbeaurai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,23 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+int	ft_unsigned_putnbr_base(unsigned long long nbr, char *base)
+{
+	size_t	nbr_base;
+	int		count;
+
+	nbr_base = ft_strlen(base);
+	count = 0;
+	if (nbr >= nbr_base)
+	{
+		count += ft_unsigned_putnbr_base((nbr / nbr_base), base);
+	}
+		nbr = nbr % nbr_base;
+		count++;
+		write(1, &base[nbr], 1);
+		return (count);
 }
 
 int	ft_putnbr_base(int nbr, char *base)
