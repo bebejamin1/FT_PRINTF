@@ -6,7 +6,7 @@
 #    By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/08 17:23:29 by bbeaurai          #+#    #+#              #
-#    Updated: 2025/11/10 08:35:51 by bbeaurai         ###   ########.fr        #
+#    Updated: 2025/11/12 10:48:27 by bbeaurai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 NAME = libftprintf.a
 
-PRINT_SRCS = ft_printf.c
+PRINT_SRCS = ft_printf.c ft_tools_nbr.c ft_tools_printf.c
 
 LIBFTDIR = Libft
 LIBFT = $(LIBFTDIR)/libft.a

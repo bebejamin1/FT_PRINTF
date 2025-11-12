@@ -39,35 +39,32 @@ va_end = liberer tout mes copain
 
 Phase 1 : La Base (Conception Extensible)
 
-[] Comprendre les fonctions variadiques (va_start, va_arg, va_end).
+[x] Comprendre les fonctions variadiques (va_start, va_arg, va_end).
 
-[] Planifier la structure de parsing (une fonction qui lit les flags -0. 
+[x] Planifier la structure de parsing (une fonction qui lit les flags -0. 
 et la largeur, même si vous ne les utilisez pas encore).
 
-[] Créer la structure principale (parser la chaîne, trouver le '%').
-
-[] Gérer le cas %%.
-
+[x] Créer la structure principale (parser la chaîne, trouver le '%').
 
 
 
 Phase 2 : Conversions Obligatoires
 
-[] Gérer %c (caractère).
+[x] Gérer le cas %%.
 
-[] Gérer %s (chaîne).
+[x] Gérer %c (caractère).
+
+[x] Gérer %s (chaîne).
 
 [] Gérer %p (pointeur en hexadécimal).
 
-[] Gérer %d (décimal).
-
-[] Gérer %i (entier).
+[x] Gérer %d (décimal)	&&	Gérer %i (entier).
 
 [] Gérer %u (décimal non signé).
 
-[] Gérer %x (héxadécimal minuscule).
+[x] Gérer %x (héxadécimal minuscule).
 
-[] Gérer %X (héxadécimal majuscule).
+[x] Gérer %X (héxadécimal majuscule).
 
 
 

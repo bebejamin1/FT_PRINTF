@@ -6,29 +6,58 @@
 /*   By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:26:53 by bbeaurai          #+#    #+#             */
-/*   Updated: 2025/11/11 16:50:07 by bbeaurai         ###   ########.fr       */
+/*   Updated: 2025/11/12 13:53:56 by bbeaurai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// int	ft_printf(const char *format, ...)
-// {
-// 	va_list ap;
-// 	int i;
+size_t	check_format(char format, va_list ap)
+{
+	size_t	lenght;
 
-// 	i = 0;
-// 	va_start(ap, format);
-// 	while (format[i])
-// 	{
-// 		if (format[i] == '%')
-// 			if (format[++i])
-// 		i++;
-// 	}
-// }
+	lenght = 0;
+	if (format == 'c')
+		lenght = for_char(va_arg(ap, int), lenght);
+	else if (format == 's')
+		lenght = for_str(va_arg(ap, char *), lenght);
+	// else if (format == 'p')
+	else if (format == 'd' || format == 'i')
+		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789");
+	// else if (format == 'u')
+	else if (format == 'x')
+		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
+	else if (format == 'X')
+		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789ABCDEF");
+	return (lenght);
+}
 
-// int	main(void)
-// {
-// 	ft_printf("Begin 10%% s End\n", "Middle");
-// 	printf("Begin %s End\n", "Middle");
-// }
+int	ft_printf(const char *format, ...)
+{
+	va_list	ap;
+	int		i;
+	int		lenght;
+
+	i = 0;
+	lenght = 0;
+	va_start(ap, format);
+	while (format[i])
+	{
+		if (format[i] == '%' && format[i + 1] != '%')
+		{
+			lenght = check_format(format[++i], ap);
+			i++;
+		}
+		if (format[i] == '%' && format[i + 1] == '%')
+			i++;
+		write(1, &format[i], 1);
+		i++;
+	}
+	return (lenght);
+}
+
+int	main(void)
+{
+	ft_printf("Begin 10 %X End\n", 15);
+	printf("\nBegin 10 %X End\n", 15);
+}
