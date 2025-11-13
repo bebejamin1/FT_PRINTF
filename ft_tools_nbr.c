@@ -6,7 +6,7 @@
 /*   By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 08:25:15 by bbeaurai          #+#    #+#             */
-/*   Updated: 2025/11/12 14:45:57 by bbeaurai         ###   ########.fr       */
+/*   Updated: 2025/11/13 10:19:32 by bbeaurai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int	ft_unsigned_putnbr_base(unsigned long long nbr, char *base)
+int	ft_u_putnbr_b(unsigned long long nbr, char *base)
 {
 	size_t	nbr_base;
 	int		count;
@@ -31,21 +31,21 @@ int	ft_unsigned_putnbr_base(unsigned long long nbr, char *base)
 	count = 0;
 	if (nbr >= nbr_base)
 	{
-		count += ft_unsigned_putnbr_base((nbr / nbr_base), base);
+		count += ft_u_putnbr_b((nbr / nbr_base), base);
 	}
-		nbr = nbr % nbr_base;
-		count++;
-		write(1, &base[nbr], 1);
-		return (count);
+	nbr = nbr % nbr_base;
+	count++;
+	write(1, &base[nbr], 1);
+	return (count);
 }
 
-int	ft_putnbr_base(int nbr, char *base)
+int	ft_putnbr_base(int nb, char *base)
 {
-	size_t	nb;
-	size_t	nbr_base;
+	long	nbr_base;
+	long	nbr;
 	int		count;
 
-	nb = nbr;
+	nbr = nb;
 	nbr_base = ft_strlen(base);
 	count = 0;
 	if (nbr < 0)
@@ -54,18 +54,19 @@ int	ft_putnbr_base(int nbr, char *base)
 		write(1, "-", 1);
 		count++;
 	}
-	if (nb >= nbr_base)
+	if (nbr >= nbr_base)
 	{
 		count += ft_putnbr_base((nbr / nbr_base), base);
 	}
-		nb = nb % nbr_base;
-		count++;
-		write(1, &base[nb], 1);
-		return (count);
+	nbr = nbr % nbr_base;
+	count++;
+	write(1, &base[nbr], 1);
+	return (count);
 }
 
 // int main(void)
 // {
-// 	printf("%d\n", ft_putnbr_base(-5000, "0123456789ABCDEF"));
-// 	ft_putnbr_base(-5000, "0123456789ABCDEF");
+// 	char *str = "coucou";
+// 	ft_printf("%d\n", str);
+// 	printf("%d", str);
 // }

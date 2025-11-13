@@ -6,7 +6,7 @@
 /*   By: bbeaurai <bbeaurai@student.42lehavre.fr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 17:26:53 by bbeaurai          #+#    #+#             */
-/*   Updated: 2025/11/12 14:48:49 by bbeaurai         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:36:05 by bbeaurai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,57 @@
 
 size_t	check_format(char format, va_list ap)
 {
-	size_t	lenght;
+	size_t	length;
 
-	lenght = 0;
-	if (format == 'c')
-		lenght = for_char(va_arg(ap, int), lenght);
+	length = 0;
+	if (format == '%')
+		length = for_percent('%');
+	else if (format == 'c')
+		length = (for_char(va_arg(ap, int)));
 	else if (format == 's')
-		lenght = for_str(va_arg(ap, char *), lenght);
+		length = (for_str(va_arg(ap, char *)));
 	else if (format == 'p')
-		lenght = for_address(ap, lenght);
+		length = (for_address(ap));
 	else if (format == 'd' || format == 'i')
-		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789");
+		length = (ft_putnbr_base(va_arg(ap, int), "0123456789"));
 	else if (format == 'u')
-		lenght = ft_unsigned_putnbr_base(va_arg(ap, unsigned int), "0123456789");
+		length = (ft_u_putnbr_b(va_arg(ap, unsigned int), "0123456789"));
 	else if (format == 'x')
-		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
+		length = (ft_u_putnbr_b(va_arg(ap, unsigned int), "0123456789abcdef"));
 	else if (format == 'X')
-		lenght = ft_putnbr_base(va_arg(ap, int), "0123456789ABCDEF");
-	return (lenght);
+		length = (ft_u_putnbr_b(va_arg(ap, unsigned int), "0123456789ABCDEF"));
+	return (length);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int		i;
-	int		lenght;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
-	lenght = 0;
+	count = 0;
 	va_start(ap, format);
 	while (format[i])
 	{
-		if (format[i] == '%' && format[i + 1] != '%')
+		if (format[i] == '%' && format[i + 1] != '\0')
 		{
-			lenght = check_format(format[++i], ap);
+			count = count + check_format(format[++i], ap);
 			i++;
 		}
-		if (format[i] == '%' && format[i + 1] == '%')
-			i++;
-		write(1, &format[i], 1);
-		i++;
+		else
+		{
+			write(1, &format[i++], 1);
+			count++;
+		}
 	}
-	return (lenght);
+	va_end(ap);
+	return (count);
 }
 
 // int	main(void)
 // {
-// 	char *str = "coucou";
-// 	ft_printf("Begin 10 %p End\n", &str);
-// 	printf("\nBegin 10 %p End\n", &str);
+// 	ft_printf("x%%x");
+// 	printf("\n");	
+// 	printf("x%%x");
 // }
